@@ -1,8 +1,6 @@
-import React from 'react'
+"use strict";
+import Dashboard from "@/Components/Dashboard";
 
-const Page = () => {
-    return (
-        <div>Home Page</div>
-    )
+export default function Home() {
+    return <Dashboard />;
 }
-export default Page

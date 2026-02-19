@@ -1,0 +1,19 @@
+[2026-02-18T22:44:06.786Z] Starting ASR. Buffer size: 887225
+[2026-02-18T22:44:06.787Z] Fetching https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3 (Attempt 1/3)
+[2026-02-18T22:44:07.040Z] HF ASR Failed: 403 {"error":"This authentication method does not have sufficient permissions to call Inference Providers on behalf of user Prasanth-1402"}
+[2026-02-18T22:44:07.040Z] ASR Exception: Error: HF ASR Error: 403 {"error":"This authentication method does not have sufficient permissions to call Inference Providers on behalf of user Prasanth-1402"}
+[2026-02-18T22:46:29.314Z] Starting TTS for text: "Hello world..."
+[2026-02-18T22:46:29.314Z] Fetching https://router.huggingface.co/hf-inference/models/facebook/mms-tts-eng (Attempt 1/3)
+[2026-02-18T22:46:29.495Z] HF TTS Failed: 403 {"error":"This authentication method does not have sufficient permissions to call Inference Providers on behalf of user Prasanth-1402"}
+[2026-02-18T22:46:29.495Z] TTS Exception: Error: HF TTS Error: 403 {"error":"This authentication method does not have sufficient permissions to call Inference Providers on behalf of user Prasanth-1402"}
+[2026-02-18T22:49:30.533Z] Starting TTS for text: "Hello! I confirm that my audio and vision systems ..."
+[2026-02-18T22:49:30.533Z] Fetching https://router.huggingface.co/hf-inference/models/facebook/mms-tts-eng (Attempt 1/3)
+[2026-02-18T22:49:30.537Z] Starting TTS for text: "Hello! I confirm that my audio and vision systems ..."
+[2026-02-18T22:49:30.537Z] Fetching https://router.huggingface.co/hf-inference/models/facebook/mms-tts-eng (Attempt 1/3)
+[2026-02-18T22:49:30.738Z] HF TTS Failed: 404 Not Found
+[2026-02-18T22:49:30.738Z] TTS Exception: Error: HF TTS Error: 404 Not Found
+[2026-02-18T22:49:30.831Z] HF TTS Failed: 404 Not Found
+[2026-02-18T22:49:30.831Z] TTS Exception: Error: HF TTS Error: 404 Not Found
+[2026-02-18T22:49:36.175Z] Starting ASR. Buffer size: 923435
+[2026-02-18T22:49:36.175Z] Fetching https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3 (Attempt 1/3)
+[2026-02-18T22:49:38.327Z] ASR Success. Transcript length: 33
