@@ -1,15 +1,23 @@
 "use client";
-import { useState, use } from "react";
+import { Suspense, useState, use } from "react";
 import MediaSetup from "@/Components/MediaSetup";
 import InterviewSession from "@/Components/InterviewSession";
+import { useSearchParams } from "next/navigation";
 
-export default function InterviewPage({ params }: { params: Promise<{ id: string }> }) {
+function InterviewContent({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
+    const searchParams = useSearchParams();
+    
+    // Parse query params
+    const langsParam = searchParams.get("langs");
+    const systemDesignParam = searchParams.get("systemDesign");
+    
+    const topics = langsParam ? langsParam.split(",") : [];
+    const isSystemDesign = systemDesignParam === "true";
+
     const [stream, setStream] = useState<MediaStream | null>(null);
 
     const handleMediaReady = (audioStream: MediaStream, videoStream: MediaStream) => {
-        // In a real app, we might combine these or handle them separately
-        // For now, we just use the videoStream which returned both in MediaSetup
         setStream(videoStream);
     };
 
@@ -17,5 +25,13 @@ export default function InterviewPage({ params }: { params: Promise<{ id: string
         return <MediaSetup onMediaReady={handleMediaReady} />;
     }
 
-    return <InterviewSession stream={stream} />;
+    return <InterviewSession stream={stream} topics={topics} isSystemDesign={isSystemDesign} />;
+}
+
+export default function InterviewPage({ params }: { params: Promise<{ id: string }> }) {
+    return (
+        <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
+            <InterviewContent params={params} />
+        </Suspense>
+    );
 }

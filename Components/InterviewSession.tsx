@@ -10,6 +10,8 @@ import { cn } from "@/lib/utils";
 
 interface InterviewSessionProps {
     stream: MediaStream;
+    topics?: string[];
+    isSystemDesign?: boolean;
 }
 
 interface Message {
@@ -30,7 +32,7 @@ interface FeedbackData {
 const vapiPublicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY!;
 const vapiAssistantId = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID!;
 
-export default function InterviewSession({ stream }: InterviewSessionProps) {
+export default function InterviewSession({ stream, topics = [], isSystemDesign = false }: InterviewSessionProps) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isConnected, setIsConnected] = useState(false);
     const [isSpeaking, setIsSpeaking] = useState(false);
@@ -126,7 +128,17 @@ export default function InterviewSession({ stream }: InterviewSessionProps) {
             }
             try {
                 toast.loading("Connecting...");
-                await vapiRef.current.start(vapiAssistantId);
+
+                // Construct dynamic first message based on user preferences
+                const topicsText = topics.length > 0 ? topics.join(", ") : "System Design";
+                const sysDesignText = isSystemDesign ? (topics.length > 0 ? " and System Design" : "") : "";
+
+                const overrides = {
+                    firstMessageMode: "assistant-speaks-first" as const,
+                    firstMessage: `Hi, I'm your AI interviewer. Today we'll cover ${topicsText}${sysDesignText}. I'll first ask a few questions to gauge your level. Are you ready?`
+                };
+
+                await vapiRef.current.start(vapiAssistantId, overrides);
             } catch (err) {
                 console.error("Failed to start Vapi call", err);
                 toast.error("Failed to start call");
@@ -297,7 +309,7 @@ export default function InterviewSession({ stream }: InterviewSessionProps) {
                                 <div className="flex flex-col items-center justify-center h-full space-y-4">
                                     <Loader2 className="h-12 w-12 animate-spin text-primary" />
                                     <p className="text-lg font-medium">Analyzing your interview performance...</p>
-                                    <p className="text-sm text-muted-foreground">Gathering insights from Gemini 3.0 Pro</p>
+                                    <p className="text-sm text-muted-foreground">Gathering insights..</p>
                                 </div>
                             )}
 
