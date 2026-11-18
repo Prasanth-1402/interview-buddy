@@ -14,7 +14,7 @@ An intelligent, interactive mock interview application powered by **Google Gemin
 
 ## Prerequisites
 
-- Node.js 18+ installed.
+- Node.js 22.14.0 or later.
 - A [Google AI Studio](https://aistudio.google.com/) account (for Gemini API).
 - A [Vapi.ai](https://vapi.ai/) account (for Voice AI).
 
